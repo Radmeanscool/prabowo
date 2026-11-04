@@ -1,0 +1,19 @@
+[Unit]
+Description=discordgo-owoselfbot (OwO farming)
+After=network-online.target
+Wants=network-online.target
+# Jangan hammer Discord saat token invalid / rate limit.
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=simple
+# Sesuaikan path ini bila repo tidak di ~/Documents/discordgo-owoselfbot-v1
+WorkingDirectory=%h/Documents/discordgo-owoselfbot-v1
+ExecStart=%h/Documents/discordgo-owoselfbot-v1/bin/discordgo-selfbot -config config.json -gateway
+Restart=on-failure
+RestartSec=10
+Environment=NO_COLOR=1
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,13 @@
+# Secrets and local configuration
+.env
+config.json
+
+# Build output and runtime files
+/bin/
+*.log
+*.pid
+
+# OS/editor files
+.DS_Store
+.vscode/
+.idea/
