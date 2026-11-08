@@ -50,7 +50,12 @@ class Proposal extends Model
         'public_team_label', 'public_show_team', 'public_show_tkt', 'public_show_links', 'public_badge',
     ];
 
-    protected $guarded = ['id'];
+    /**
+     * Hanya isian peserta dan ringkasan publik yang boleh diisi massal. Status, publikasi
+     * (is_public, published_at, public_slug, public_pdf_enabled), dan kolom sistem diubah
+     * secara eksplisit oleh ProposalWorkflow.
+     */
+    protected $fillable = [...self::PARTICIPANT_TEXT_FIELDS, 'tkt_level', ...self::PUBLIC_FIELDS];
 
     protected function casts(): array
     {

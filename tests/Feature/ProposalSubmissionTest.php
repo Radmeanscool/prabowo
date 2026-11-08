@@ -90,6 +90,26 @@ class ProposalSubmissionTest extends TestCase
         $this->assertSame(ProposalStatus::Draft, $proposal->status);
     }
 
+    public function test_status_and_publication_fields_cannot_be_injected_by_participant(): void
+    {
+        $leader = $this->participant();
+        $proposal = $this->proposalFor($this->teamFor($leader));
+
+        $this->actingAs($leader)->put(route('portal.proposals.update', $proposal), [
+            'product_name' => 'Aman', 'status' => 'approved', 'is_public' => '1', 'public_slug' => 'retas',
+            'public_pdf_enabled' => '1', 'team_id' => 999, 'approved_at' => now()->toDateTimeString(),
+        ])->assertRedirect();
+
+        $proposal->refresh();
+        $this->assertSame('Aman', $proposal->product_name);
+        $this->assertSame(ProposalStatus::Draft, $proposal->status);
+        $this->assertFalse($proposal->is_public);
+        $this->assertFalse($proposal->public_pdf_enabled);
+        $this->assertNull($proposal->public_slug);
+        $this->assertNull($proposal->approved_at);
+        $this->assertNotSame(999, $proposal->team_id);
+    }
+
     public function test_invalid_controlled_values_are_rejected(): void
     {
         $leader = $this->participant();
