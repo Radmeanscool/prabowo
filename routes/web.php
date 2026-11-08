@@ -159,6 +159,7 @@ Route::middleware(['auth', 'active', 'role:reviewer'])->prefix('reviewer')->name
 */
 Route::middleware(['auth', 'active', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('media/{type}/{id}', [Admin\MediaController::class, 'show'])->whereNumber('id')->name('media');
 
     Route::resource('users', Admin\UserController::class)->except(['show', 'destroy']);
     Route::post('users/{user}/toggle', [Admin\UserController::class, 'toggle'])->name('users.toggle');

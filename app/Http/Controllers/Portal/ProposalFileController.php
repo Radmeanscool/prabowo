@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Portal;
 use App\Http\Controllers\Controller;
 use App\Models\Proposal;
 use App\Models\ProposalFile;
+use App\Rules\FileContentType;
 use App\Services\Audit;
 use App\Services\SecureFileStore;
 use App\Support\Options;
@@ -87,10 +88,12 @@ class ProposalFileController extends Controller
         $pdfKb = max(1, (int) setting('max_pdf_size_mb', 10)) * 1024;
         $imageKb = max(1, (int) setting('max_image_size_mb', 5)) * 1024;
 
+        $images = ['image/jpeg', 'image/png', 'image/webp'];
+
         return match ($kind) {
-            'image' => ['mimes:jpg,jpeg,png,webp', 'mimetypes:image/jpeg,image/png,image/webp', 'max:'.$imageKb, 'dimensions:min_width=400,min_height=300'],
-            'pdf' => ['mimes:pdf', 'mimetypes:application/pdf', 'max:'.$pdfKb],
-            default => ['mimes:pdf,jpg,jpeg,png,webp', 'mimetypes:application/pdf,image/jpeg,image/png,image/webp', 'max:'.$pdfKb],
+            'image' => ['mimes:jpg,jpeg,png,webp', 'mimetypes:image/jpeg,image/png,image/webp', new FileContentType($images), 'max:'.$imageKb, 'dimensions:min_width=400,min_height=300'],
+            'pdf' => ['mimes:pdf', 'mimetypes:application/pdf', new FileContentType(['application/pdf']), 'max:'.$pdfKb],
+            default => ['mimes:pdf,jpg,jpeg,png,webp', 'mimetypes:application/pdf,image/jpeg,image/png,image/webp', new FileContentType(array_merge(['application/pdf'], $images)), 'max:'.$pdfKb],
         };
     }
 }

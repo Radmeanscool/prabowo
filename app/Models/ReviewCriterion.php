@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ReviewCriterion extends Model
 {
@@ -31,5 +32,15 @@ class ReviewCriterion extends Model
     public function theme(): BelongsTo
     {
         return $this->belongsTo(Theme::class);
+    }
+
+    public function scores(): HasMany
+    {
+        return $this->hasMany(ReviewScore::class);
+    }
+
+    public function hasScores(): bool
+    {
+        return $this->scores()->whereNotNull('score')->exists();
     }
 }

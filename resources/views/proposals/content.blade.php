@@ -4,7 +4,6 @@
     $viewer: participant | reviewer | admin
 --}}
 @php
-    use App\Support\Options;
     $blind = $blind ?? false;
     $viewer = $viewer ?? 'participant';
     $field = fn ($label, $value) => ['label' => $label, 'value' => $value];
@@ -45,7 +44,7 @@
             <div><dt>Tema</dt><dd><x-theme-badge :theme="$proposal->theme" /></dd></div>
             <div><dt>Tantangan</dt><dd>{{ $proposal->challenge?->title ?? '—' }}@if ($proposal->challenge?->owner) <span class="text-navy-500">· {{ $proposal->challenge->owner->displayName() }}</span>@endif</dd></div>
             <div><dt>TKT</dt><dd>{{ $proposal->tkt_level ? 'TKT '.$proposal->tkt_level : '—' }}</dd></div>
-            <div><dt>Status purwarupa</dt><dd>{{ Options::label(Options::prototypeStatuses(), $proposal->prototype_status) }}</dd></div>
+            <div><dt>Status purwarupa</dt><dd>{{ \App\Support\Options::label(\App\Support\Options::prototypeStatuses(), $proposal->prototype_status) }}</dd></div>
         </dl>
     </section>
 
@@ -123,10 +122,10 @@
         <h2 class="text-lg font-extrabold">G. Kesiapan legal, keselamatan, etik, dan data</h2>
         <p class="mt-1 text-xs text-navy-500">Catatan kesiapan untuk telaah pakar, bukan pernyataan kepatuhan hukum.</p>
         <dl class="data-list mt-2">
-            <div><dt>Status KI</dt><dd>{{ Options::label(Options::ipStatuses(), $proposal->ip_status) }}</dd></div>
-            <div><dt>Izin/standar</dt><dd>{{ Options::label(Options::regulatoryStatuses(), $proposal->regulatory_status) }}</dd></div>
-            <div><dt>Data pribadi/kesehatan</dt><dd>{{ Options::label(Options::dataRiskStatuses(), $proposal->data_risk_status) }}</dd></div>
-            <div><dt>Persetujuan etik</dt><dd>{{ Options::label(Options::ethicsStatuses(), $proposal->ethics_status) }}</dd></div>
+            <div><dt>Status KI</dt><dd>{{ \App\Support\Options::label(\App\Support\Options::ipStatuses(), $proposal->ip_status) }}</dd></div>
+            <div><dt>Izin/standar</dt><dd>{{ \App\Support\Options::label(\App\Support\Options::regulatoryStatuses(), $proposal->regulatory_status) }}</dd></div>
+            <div><dt>Data pribadi/kesehatan</dt><dd>{{ \App\Support\Options::label(\App\Support\Options::dataRiskStatuses(), $proposal->data_risk_status) }}</dd></div>
+            <div><dt>Persetujuan etik</dt><dd>{{ \App\Support\Options::label(\App\Support\Options::ethicsStatuses(), $proposal->ethics_status) }}</dd></div>
         </dl>
         <div class="mt-2 divide-y divide-navy-100">
             @foreach ([

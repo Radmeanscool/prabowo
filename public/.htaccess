@@ -5,6 +5,13 @@
 
     RewriteEngine On
 
+    # Tolak akses ke berkas/folder tersembunyi (.env, .git, dll.), kecuali .well-known
+    RewriteRule (^|/)\.(?!well-known/) - [F,L]
+
+    # Aktifkan bila sertifikat SSL sudah terpasang (paksa HTTPS):
+    # RewriteCond %{HTTPS} !=on
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -22,4 +29,11 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+</IfModule>
+
+# Jangan izinkan daftar isi folder.
+Options -Indexes
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
 </IfModule>

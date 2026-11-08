@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Proposal;
 use App\Models\ProposalFile;
 use App\Models\User;
+use App\Rules\FileContentType;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -57,7 +58,7 @@ class SecureFileStore
     public static function store(UploadedFile $file, string $directory): array
     {
         // Jenis berkas ditentukan dari isi berkas (finfo), bukan dari nama/ekstensi kiriman pengguna.
-        $mime = (string) $file->getMimeType();
+        $mime = (string) FileContentType::detect($file);
         $extension = (self::IMAGE_MIMES + self::PDF_MIMES)[$mime] ?? null;
         if ($extension === null) {
             throw new InvalidArgumentException('Jenis berkas tidak diizinkan.');
@@ -117,7 +118,11 @@ class SecureFileStore
             'Cache-Control' => $private ? 'private, no-store, max-age=0' : 'public, max-age=3600',
             'Content-Security-Policy' => "default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; sandbox",
             'Content-Disposition' => HeaderUtils::makeDisposition($inline ? 'inline' : 'attachment', $downloadName, $fallback),
-        ]);
+        ], ! $private);
+
+        if ($private) {
+            $response->headers->set('Cache-Control', 'private, no-store, max-age=0');
+        }
 
         return $response;
     }

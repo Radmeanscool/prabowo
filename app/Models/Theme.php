@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Theme extends Model
 {
     public const FOOD_SECURITY = 'food_security';
+
     public const HEALTH = 'health';
+
     public const HYBRID = 'hybrid';
 
     protected $fillable = ['code', 'name', 'name_en', 'description', 'color', 'sort_order', 'is_active'];

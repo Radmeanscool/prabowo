@@ -43,6 +43,11 @@ class Review extends Model
         return $this->belongsTo(ReviewPhase::class, 'review_phase_id');
     }
 
+    public function reopenedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'reopened_by');
+    }
+
     public function scores(): HasMany
     {
         return $this->hasMany(ReviewScore::class);

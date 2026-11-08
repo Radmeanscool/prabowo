@@ -10,6 +10,8 @@ use App\Models\ProposalVersion;
 use App\Models\User;
 use DomainException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /**
  * Satu-satunya tempat perubahan status proposal dan publikasi produk.
@@ -192,12 +194,12 @@ class ProposalWorkflow
 
     protected function copyToPublicImage(Proposal $proposal, string $path): ?string
     {
-        $disk = \Illuminate\Support\Facades\Storage::disk('local');
+        $disk = Storage::disk('local');
         if (! $disk->exists($path)) {
             return null;
         }
 
-        $target = 'public-products/'.$proposal->id.'/'.\Illuminate\Support\Str::random(32).'.'.pathinfo($path, PATHINFO_EXTENSION);
+        $target = 'public-products/'.$proposal->id.'/'.Str::random(32).'.'.pathinfo($path, PATHINFO_EXTENSION);
         $disk->copy($path, $target);
 
         return $target;

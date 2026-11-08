@@ -1,0 +1,13 @@
+# Pengaman cadangan: bila seluruh folder proyek terlanjur diletakkan di dalam public_html,
+# semua permintaan diarahkan ke folder public/ sehingga .env, kode sumber, dan
+# storage/ tidak dapat diakses langsung dari browser.
+# Cara yang DIANJURKAN tetap: arahkan document root domain ke folder public/
+# (lihat docs/DEPLOYMENT.md).
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    Require all denied
+</IfModule>
