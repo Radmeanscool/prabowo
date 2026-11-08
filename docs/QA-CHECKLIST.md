@@ -1,6 +1,6 @@
 # Daftar Uji (QA) DEEPNEST
 
-Uji otomatis: `php artisan test` (83 uji). Kolom **Uji otomatis** menunjukkan kelas/metode yang mencakup butir.
+Uji otomatis: `php artisan test` (84 uji). Kolom **Uji otomatis** menunjukkan kelas/metode yang mencakup butir.
 Lakukan uji manual berikut di server *staging* sebelum Open Call dibuka, di desktop **dan** ponsel.
 
 ## A. Kriteria penerimaan (spesifikasi)
@@ -39,6 +39,7 @@ Lakukan uji manual berikut di server *staging* sebelum Open Call dibuka, di desk
 | URL berkas tanpa hak → 403/404/redirect login | `FileSecurityTest::test_private_file_access_rules_per_role`, `test_unknown_file_identifier_returns_404` | ☐ |
 | Pengiriman ganda diblokir; proposal terkirim terkunci | `ProposalSubmissionTest::test_submitted_proposal_is_locked…` | ☐ |
 | Eskalasi peran lewat pendaftaran/profil gagal | `AuthAndRoleTest::test_registration_cannot_escalate_role`, `test_participant_cannot_change_role_via_profile` | ☐ |
+| Peserta tidak dapat menyisipkan status/publikasi lewat formulir | `ProposalSubmissionTest::test_status_and_publication_fields_cannot_be_injected_by_participant` | ☐ |
 | Peran tidak dapat mengakses dashboard peran lain | `AuthAndRoleTest::test_each_role_only_reaches_its_own_dashboard` | ☐ |
 | Reviewer tidak dapat mengubah status/publikasi | `ReviewerFlowTest::test_reviewer_cannot_change_status_or_publication` | ☐ |
 | Konflik kepentingan memblokir penugasan | `AssignmentTest::*` | ☐ |

@@ -102,7 +102,7 @@ Akun demo (kata sandi `Deepnest2026`): `admin@deepnest.test`, `reviewer1@deepnes
 php artisan test
 ```
 
-83 uji otomatis (564 asersi) mencakup otorisasi per peran, eskalasi peran, alur tim, alur proposal,
+84 uji otomatis (572 asersi) mencakup otorisasi per peran, eskalasi peran, alur tim, alur proposal,
 privasi berkas (jenis berkas palsu, ukuran berlebih, URL tanpa hak), penugasan & konflik kepentingan,
 perhitungan skor, keputusan, publikasi otomatis, PDF publik, cabut publikasi, keamanan Markdown,
 header keamanan, serta uji asap yang merender setiap halaman setiap peran. Seluruh uji lulus pada
