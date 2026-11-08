@@ -10,23 +10,28 @@
                     <option value="">Semua tema</option>
                     @foreach ($themes as $theme)<option value="{{ $theme->code }}" @selected($activeTheme?->id === $theme->id)>{{ $theme->name }}</option>@endforeach
                 </select>
-                <select name="mitra" class="form-select" aria-label="Mitra">
-                    <option value="">Semua mitra</option>
-                    @foreach ($owners as $slug => $name)<option value="{{ $slug }}" @selected(request('mitra') === $slug)>{{ $name }}</option>@endforeach
-                </select>
-                <select name="tahap" class="form-select" aria-label="Tahap program">
-                    <option value="">Semua tahap</option>
-                    @foreach ($stages as $code => $name)<option value="{{ $code }}" @selected(request('tahap') === $code)>{{ $name }}</option>@endforeach
-                </select>
-                <select name="tahun" class="form-select" aria-label="Tahun terbit">
-                    <option value="">Semua tahun</option>
-                    @foreach ($years as $year)<option value="{{ $year }}" @selected(request('tahun') == $year)>{{ $year }}</option>@endforeach
-                </select>
-                <input type="search" name="institusi" value="{{ request('institusi') }}" placeholder="Institusi" class="form-input lg:col-span-2" aria-label="Institusi">
-                <select name="urut" class="form-select" aria-label="Urutkan">
-                    <option value="">Terbaru</option>
-                    <option value="terlama" @selected(request('urut') === 'terlama')>Terlama</option>
-                </select>
+                <button type="button" class="btn btn-outline lg:hidden" data-toggle="#product-filters" data-toggle-class="is-open" aria-controls="product-filters" aria-expanded="false">
+                    <x-icon name="settings" class="size-4" /> Filter lainnya
+                </button>
+                <div id="product-filters" class="filter-extra {{ request()->hasAny(['mitra', 'tahap', 'tahun', 'institusi', 'urut']) ? 'is-open' : '' }}">
+                    <select name="mitra" class="form-select" aria-label="Mitra">
+                        <option value="">Semua mitra</option>
+                        @foreach ($owners as $slug => $name)<option value="{{ $slug }}" @selected(request('mitra') === $slug)>{{ $name }}</option>@endforeach
+                    </select>
+                    <select name="tahap" class="form-select" aria-label="Tahap program">
+                        <option value="">Semua tahap</option>
+                        @foreach ($stages as $code => $name)<option value="{{ $code }}" @selected(request('tahap') === $code)>{{ $name }}</option>@endforeach
+                    </select>
+                    <select name="tahun" class="form-select" aria-label="Tahun terbit">
+                        <option value="">Semua tahun</option>
+                        @foreach ($years as $year)<option value="{{ $year }}" @selected(request('tahun') == $year)>{{ $year }}</option>@endforeach
+                    </select>
+                    <input type="search" name="institusi" value="{{ request('institusi') }}" placeholder="Institusi" class="form-input lg:col-span-2" aria-label="Institusi">
+                    <select name="urut" class="form-select" aria-label="Urutkan">
+                        <option value="">Terbaru</option>
+                        <option value="terlama" @selected(request('urut') === 'terlama')>Terlama</option>
+                    </select>
+                </div>
                 <div class="flex gap-2 lg:col-span-3">
                     <button class="btn btn-dark flex-1"><x-icon name="search" class="size-4" /> Terapkan</button>
                     <a href="{{ route('products.index') }}" class="btn btn-ghost">Atur ulang</a>
