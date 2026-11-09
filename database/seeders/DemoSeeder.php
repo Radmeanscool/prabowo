@@ -72,16 +72,16 @@ class DemoSeeder extends Seeder
         $scenarios = [
             ['team' => 'Tim Demo Rumput Laut', 'leader' => 'peserta1@deepnest.test', 'member' => 'peserta2@deepnest.test', 'institution' => 'Universitas Hasanuddin',
                 'product' => 'SeaTrace: ketertelusuran mutu rumput laut', 'theme' => Theme::FOOD_SECURITY, 'challenge' => 'ketertelusuran-dan-mutu-rumput-laut-pascapanen',
-                'summary' => 'Sensor kadar air portabel dan aplikasi ketertelusuran untuk menjaga mutu rumput laut pascapanen.', 'final' => 'approved', 'color' => [31, 138, 100]],
+                'summary' => 'Sensor kadar air portabel dan aplikasi ketertelusuran untuk menjaga mutu rumput laut pascapanen.', 'final' => 'approved', 'color' => [61, 110, 70]],
             ['team' => 'Tim Demo Bunda Sehat', 'leader' => 'peserta3@deepnest.test', 'member' => 'peserta4@deepnest.test', 'institution' => 'Politeknik Kesehatan Makassar',
                 'product' => 'PantauBunda: pemantauan kehamilan berbasis kader', 'theme' => Theme::HEALTH, 'challenge' => 'pemantauan-kesehatan-ibu-hamil-dan-pencegahan-stunting',
-                'summary' => 'Alat ukur dan aplikasi kader untuk memantau kehamilan berisiko dan mengingatkan jadwal pemeriksaan.', 'final' => 'approved', 'color' => [208, 64, 75]],
+                'summary' => 'Alat ukur dan aplikasi kader untuk memantau kehamilan berisiko dan mengingatkan jadwal pemeriksaan.', 'final' => 'approved', 'color' => [168, 64, 47]],
             ['team' => 'Tim Demo Sapi Presisi', 'leader' => 'peserta5@deepnest.test', 'member' => 'peserta6@deepnest.test', 'institution' => 'Universitas Negeri Makassar',
                 'product' => 'BirahiCam: deteksi birahi sapi', 'theme' => Theme::FOOD_SECURITY, 'challenge' => 'intensifikasi-reproduksi-dan-peningkatan-populasi-sapi',
-                'summary' => 'Kamera dan sensor gerak untuk mendeteksi masa birahi sapi agar inseminasi buatan tepat waktu.', 'final' => 'under_review', 'color' => [106, 85, 214]],
+                'summary' => 'Kamera dan sensor gerak untuk mendeteksi masa birahi sapi agar inseminasi buatan tepat waktu.', 'final' => 'under_review', 'color' => [61, 110, 70]],
             ['team' => 'Tim Demo Pulau Sehat', 'leader' => 'peserta7@deepnest.test', 'member' => 'peserta8@deepnest.test', 'institution' => 'Startup Demo Makassar',
                 'product' => 'Telerujuk Kepulauan', 'theme' => Theme::HYBRID, 'challenge' => 'drone-untuk-pertanian-pemantauan-laut-dan-distribusi-alat-kesehatan',
-                'summary' => 'Layanan drone dan telekonsultasi untuk rujukan cepat dari pulau ke daratan.', 'final' => 'draft', 'color' => [29, 111, 209]],
+                'summary' => 'Layanan drone dan telekonsultasi untuk rujukan cepat dari pulau ke daratan.', 'final' => 'draft', 'color' => [168, 64, 47]],
         ];
 
         foreach ($scenarios as $index => $s) {
@@ -202,22 +202,17 @@ class DemoSeeder extends Seeder
 
     private function demoImage(array $rgb): UploadedFile
     {
+        // Gambar contoh sederhana: bidang warna tema dengan tanda "sarang" DEEPNEST.
         $w = 1200;
-        $h = 800;
+        $h = 900;
         $img = imagecreatetruecolor($w, $h);
-        for ($y = 0; $y < $h; $y++) {
-            $t = $y / $h;
-            $c = imagecolorallocate($img, (int) (12 + ($rgb[0] - 12) * $t * 0.6), (int) (28 + ($rgb[1] - 28) * $t * 0.6), (int) (52 + ($rgb[2] - 52) * $t * 0.6));
-            imageline($img, 0, $y, $w, $y, $c);
+        imagefilledrectangle($img, 0, 0, $w, $h, imagecolorallocate($img, $rgb[0], $rgb[1], $rgb[2]));
+        $paper = imagecolorallocate($img, 246, 242, 234);
+        imagesetthickness($img, 10);
+        foreach ([520, 340, 160] as $diameter) {
+            imagearc($img, 600, 470, $diameter, $diameter, 0, 180, $paper);
         }
-        imagesetthickness($img, 22);
-        $accent = imagecolorallocate($img, $rgb[0], $rgb[1], $rgb[2]);
-        $amber = imagecolorallocate($img, 245, 185, 58);
-        $white = imagecolorallocate($img, 255, 255, 255);
-        imagearc($img, 600, 470, 640, 640, 0, 180, $amber);
-        imagearc($img, 600, 470, 440, 440, 0, 180, $accent);
-        imagearc($img, 600, 470, 240, 240, 0, 180, $white);
-        imagefilledellipse($img, 600, 330, 90, 90, $amber);
+        imagefilledellipse($img, 600, 330, 56, 56, imagecolorallocate($img, 210, 115, 76));
 
         $path = tempnam(sys_get_temp_dir(), 'dn').'.png';
         imagepng($img, $path);

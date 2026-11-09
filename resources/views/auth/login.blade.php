@@ -1,5 +1,5 @@
 <x-layouts.auth title="Masuk">
-    <h1 class="text-2xl font-extrabold">Masuk ke portal DEEPNEST</h1>
+    <h1 class="font-serif text-[2.6rem] font-normal leading-[1.05]">Masuk ke portal DEEPNEST</h1>
     <p class="mt-2 text-sm text-navy-500">Untuk peserta, reviewer/juri, dan admin.</p>
 
     <div class="mt-6"><x-flash /></div>

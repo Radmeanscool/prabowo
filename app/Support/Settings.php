@@ -61,13 +61,13 @@ class Settings
             // Notifikasi
             'email_notifications_enabled' => false,
 
+            // Angka di beranda adalah TARGET/RENCANA dari proposal program, bukan capaian.
+            // Beranda selalu menandainya demikian; ubah melalui Pengaturan bila rencana berubah.
             'homepage_stats' => [
-                ['value' => '15', 'label' => 'Tim lintas disiplin', 'note' => 'Target peserta program'],
-                ['value' => '≥ 3', 'label' => 'Purwarupa fungsional', 'note' => 'Target tervalidasi awal'],
-                ['value' => '30', 'label' => 'Mentor', 'note' => 'Rencana: 15 dosen Unhas dan 15 praktisi mitra'],
-                ['value' => '7', 'label' => 'Juri', 'note' => 'Rencana: Unhas, BRIN, Kemenkes, Kementan'],
-                ['value' => '38 JP', 'label' => 'Bimbingan teknis', 'note' => '1 JP setara 45 menit'],
-                ['value' => '192', 'label' => 'Laboratorium Unhas', 'note' => 'Pendukung pengembangan dan pengujian'],
+                ['value' => '15', 'label' => 'Tim lintas disiplin', 'note' => 'Target minimum peserta program'],
+                ['value' => '3', 'label' => 'Purwarupa fungsional', 'note' => 'Target minimum, tervalidasi awal'],
+                ['value' => '38 JP', 'label' => 'Bimbingan teknis', 'note' => 'Rencana; 1 JP setara 45 menit'],
+                ['value' => '12', 'label' => 'Bulan program', 'note' => 'Dari perumusan tantangan hingga adopsi'],
             ],
         ];
     }

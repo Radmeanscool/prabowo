@@ -1,5 +1,5 @@
 <x-layouts.auth title="Atur ulang kata sandi">
-    <h1 class="text-2xl font-extrabold">Atur ulang kata sandi</h1>
+    <h1 class="font-serif text-[2.6rem] font-normal leading-[1.05]">Atur ulang kata sandi</h1>
     <div class="mt-6"><x-flash /></div>
     <form method="POST" action="{{ route('password.update') }}" class="space-y-4">
         @csrf

@@ -1,6 +1,6 @@
 # Daftar Uji (QA) DEEPNEST
 
-Uji otomatis: `php artisan test` (84 uji). Kolom **Uji otomatis** menunjukkan kelas/metode yang mencakup butir.
+Uji otomatis: `php artisan test` (87 uji). Kolom **Uji otomatis** menunjukkan kelas/metode yang mencakup butir.
 Lakukan uji manual berikut di server *staging* sebelum Open Call dibuka, di desktop **dan** ponsel.
 
 ## A. Kriteria penerimaan (spesifikasi)
@@ -47,11 +47,15 @@ Lakukan uji manual berikut di server *staging* sebelum Open Call dibuka, di desk
 | Header keamanan terpasang | `PublicSiteTest::test_security_headers_are_present` | ☐ |
 | `/setup` hanya tersedia dengan token dan sebelum ada admin | `AuthAndRoleTest::test_setup_wizard_only_available…` | ☐ |
 | Setiap halaman setiap peran dapat dirender | `SmokeTest::*` | ☐ |
+| Beranda hanya menampilkan informasi terverifikasi (status dari data, target diberi label, tanpa bagian kosong) | `PublicSiteTest::test_homepage_shows_only_verifiable_information` | ☐ |
+| Agenda rencana tidak tampil sebelum ditayangkan admin | `PublicSiteTest::test_planned_agenda_items_stay_private_until_admin_publishes_them` | ☐ |
+| Bagian dan tautan Produk muncul setelah ada produk disetujui | `PublicSiteTest::test_product_section_and_navigation_appear_once_a_product_is_approved` | ☐ |
 
 ## C. Uji manual per peran (staging)
 
 **Pengunjung:** beranda tampil benar di ponsel; menu ponsel terbuka/tertutup; tautan Tantangan, Tahapan,
-Linimasa, Agenda, Produk, Pengumuman, FAQ berfungsi; produk tersembunyi memberi 404.
+Linimasa, Agenda, Pengumuman, FAQ berfungsi; produk tersembunyi memberi 404; sebelum ada produk disetujui
+tidak ada bagian maupun tautan "Produk"; tidak ada angka atau nama lembaga yang belum terkonfirmasi.
 
 **Peserta:** daftar → buat tim → bagikan kode → anggota lain bergabung → ketua menyetujui → pilih tema
 (tantangan berubah sesuai tema) → pilih tantangan → isi semua bagian (penghitung kata) → simpan draf →

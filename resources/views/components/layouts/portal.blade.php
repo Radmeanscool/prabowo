@@ -110,9 +110,9 @@
             <x-icon name="x" />
         </button>
     </div>
-    <div class="mx-4 mb-2 rounded-xl bg-white/5 px-3 py-2.5">
-        <p class="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-signal-400">{{ $portalLabel }}</p>
-        <p class="mt-0.5 truncate text-sm font-semibold text-white">{{ $user->name }}</p>
+    <div class="mx-4 mb-2 border-y border-white/10 px-1 py-3">
+        <p class="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-signal-300">{{ $portalLabel }}</p>
+        <p class="mt-0.5 truncate text-sm font-semibold text-paper">{{ $user->name }}</p>
     </div>
     <nav class="flex-1 overflow-y-auto px-3 pb-6">
         @foreach ($sections as $heading => $items)
@@ -138,7 +138,7 @@
 <div class="portal-backdrop" data-toggle="#portal-sidebar" data-toggle-class="is-open" aria-hidden="true"></div>
 
 <div class="lg:pl-72">
-    <header class="sticky top-0 z-30 border-b border-navy-100 bg-white/90 backdrop-blur">
+    <header class="sticky top-0 z-30 border-b border-navy-950/10 bg-paper/90 backdrop-blur">
         <div class="flex h-16 items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-2">
                 <button type="button" class="btn btn-ghost -ml-2 lg:hidden" data-toggle="#portal-sidebar" data-toggle-class="is-open" aria-controls="portal-sidebar" aria-expanded="false" aria-label="Buka menu">
@@ -147,23 +147,23 @@
                 <span class="hidden text-sm font-semibold text-navy-500 sm:inline">{{ $portalLabel }}</span>
             </div>
             <details class="relative" data-dropdown>
-                <summary class="flex cursor-pointer list-none items-center gap-2 rounded-xl px-2 py-1.5 hover:bg-navy-50 [&::-webkit-details-marker]:hidden">
-                    <span class="flex size-8 items-center justify-center rounded-full bg-forest-600 text-xs font-bold text-white">{{ mb_strtoupper(mb_substr($user->name, 0, 1)) }}</span>
+                <summary class="flex cursor-pointer list-none items-center gap-2 rounded-[4px] px-2 py-1.5 hover:bg-navy-100/60 [&::-webkit-details-marker]:hidden">
+                    <span class="flex size-8 items-center justify-center rounded-full bg-navy-950 text-xs font-semibold text-paper">{{ mb_strtoupper(mb_substr($user->name, 0, 1)) }}</span>
                     <span class="hidden max-w-48 truncate text-sm font-semibold text-navy-800 sm:inline">{{ $user->name }}</span>
                     <x-icon name="chevron-down" class="size-4 text-navy-400" />
                 </summary>
-                <div class="absolute right-0 mt-2 w-60 rounded-2xl border border-navy-100 bg-white p-2 shadow-xl">
+                <div class="absolute right-0 mt-2 w-60 border border-navy-950/15 bg-sheet p-2 shadow-[0_18px_40px_-20px_rgba(21,20,15,0.35)]">
                     <div class="px-3 py-2">
                         <p class="truncate text-sm font-semibold text-navy-900">{{ $user->email }}</p>
                         <p class="text-xs text-navy-500">{{ $user->role->label() }}</p>
                     </div>
                     @if ($user->isParticipant())
-                        <a href="{{ route('portal.profile') }}" class="flex items-center gap-2 rounded-xl px-3 py-2 text-sm hover:bg-navy-50"><x-icon name="user" class="size-4" /> Profil</a>
+                        <a href="{{ route('portal.profile') }}" class="flex items-center gap-2 rounded-[3px] px-3 py-2 text-sm hover:bg-navy-50"><x-icon name="user" class="size-4" /> Profil</a>
                     @endif
-                    <a href="{{ route('account.password') }}" class="flex items-center gap-2 rounded-xl px-3 py-2 text-sm hover:bg-navy-50"><x-icon name="lock" class="size-4" /> Ubah kata sandi</a>
+                    <a href="{{ route('account.password') }}" class="flex items-center gap-2 rounded-[3px] px-3 py-2 text-sm hover:bg-navy-50"><x-icon name="lock" class="size-4" /> Ubah kata sandi</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm text-red-700 hover:bg-red-50"><x-icon name="logout" class="size-4" /> Keluar</button>
+                        <button type="submit" class="flex w-full items-center gap-2 rounded-[3px] px-3 py-2 text-sm text-red-700 hover:bg-red-50"><x-icon name="logout" class="size-4" /> Keluar</button>
                     </form>
                 </div>
             </details>

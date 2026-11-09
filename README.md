@@ -19,12 +19,15 @@ Dibangun dengan **Laravel 13 + MySQL/MariaDB** dan siap dipasang di shared hosti
 
 ## Fitur yang sudah diimplementasikan
 
-**Situs publik** (bahasa Indonesia, responsif): Beranda editorial (hero, tema, tantangan, mitra,
-4 fase program, target luaran, mentor & juri, etalase produk, pengumuman, agenda, ajakan daftar),
+**Situs publik** (bahasa Indonesia, responsif, tipografi editorial Instrument Serif/Sans): Beranda
+(pembuka dengan blok *Status program* yang dibaca dari data, tema, tantangan, mitra, 4 fase program,
+target program berlabel *bukan capaian*, mentor & juri, etalase produk, kabar terbaru, ajakan daftar),
 Tentang, Tantangan (+ detail), Mitra Challenge Owner, Tahapan Program, Linimasa, Agenda,
 Mentor & Juri, Produk Disetujui (+ detail dan penyaring), Pengumuman, Sumber Daya, Ketentuan, FAQ,
 Privasi, Syarat, Daftar, Masuk, Lupa kata sandi. Semua konten dapat dikelola admin dan
-**hanya informasi terkonfirmasi** yang tampil.
+**hanya informasi terkonfirmasi** yang tampil: bagian beranda yang belum berisi data terbit (produk, mitra,
+pengumuman, agenda, dokumen) disembunyikan, dan tautan navigasi Produk, Mitra, serta Sumber Daya baru
+muncul setelah ada isinya.
 
 **Tiga dashboard utama**
 
@@ -102,7 +105,7 @@ Akun demo (kata sandi `Deepnest2026`): `admin@deepnest.test`, `reviewer1@deepnes
 php artisan test
 ```
 
-84 uji otomatis (572 asersi) mencakup otorisasi per peran, eskalasi peran, alur tim, alur proposal,
+87 uji otomatis (601 asersi) mencakup otorisasi per peran, eskalasi peran, alur tim, alur proposal,
 privasi berkas (jenis berkas palsu, ukuran berlebih, URL tanpa hak), penugasan & konflik kepentingan,
 perhitungan skor, keputusan, publikasi otomatis, PDF publik, cabut publikasi, keamanan Markdown,
 header keamanan, serta uji asap yang merender setiap halaman setiap peran. Seluruh uji lulus pada

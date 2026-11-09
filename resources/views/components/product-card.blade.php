@@ -2,33 +2,35 @@
 @php
     $owner = $product->challenge?->publicOwner();
     $team = $product->publicTeamLabel();
+    $url = route('products.show', $product->public_slug);
 @endphp
-<article {{ $attributes->merge(['class' => 'card card-link group flex flex-col overflow-hidden']) }}>
-    <a href="{{ route('products.show', $product->public_slug) }}" class="relative block aspect-[16/10] overflow-hidden bg-navy-900" tabindex="-1" aria-hidden="true">
+<article {{ $attributes->merge(['class' => 'group flex flex-col']) }}>
+    <a href="{{ $url }}" class="relative block aspect-[4/3] overflow-hidden bg-navy-100" tabindex="-1" aria-hidden="true">
         @if ($product->public_image_path)
-            <img src="{{ route('media.product-image', $product->public_slug) }}" alt="" loading="lazy" class="size-full object-cover transition duration-500 group-hover:scale-105">
+            <img src="{{ route('media.product-image', $product->public_slug) }}" alt="" loading="lazy" class="size-full object-cover transition duration-500 group-hover:scale-[1.02]">
         @else
-            <span class="hero-surface flex size-full items-center justify-center">
-                <span class="text-4xl font-extrabold tracking-widest text-white/80">{{ mb_strtoupper(mb_substr($product->displayTitle(), 0, 2)) }}</span>
+            <span class="flex size-full items-end p-5">
+                <span class="font-serif text-6xl leading-none text-navy-400">{{ mb_strtoupper(mb_substr($product->displayTitle(), 0, 2)) }}</span>
             </span>
         @endif
-        @if ($product->publicBadgeLabel())
-            <span class="badge badge-dark absolute left-3 top-3 bg-navy-950/85 ring-white/20 backdrop-blur">{{ $product->publicBadgeLabel() }}</span>
-        @endif
     </a>
-    <div class="flex flex-1 flex-col p-5">
-        <div class="flex flex-wrap gap-2">
-            <x-theme-badge :theme="$product->theme" />
-            @if ($owner)<span class="badge badge-neutral">{{ $owner->displayName() }}</span>@endif
-        </div>
-        <h3 class="mt-3 text-lg font-bold leading-snug text-navy-950"><a href="{{ route('products.show', $product->public_slug) }}" class="hover:text-forest-700">{{ $product->displayTitle() }}</a></h3>
-        <p class="mt-2 line-clamp-3 text-sm leading-relaxed text-navy-600">{{ $product->public_short_description }}</p>
-        @if ($product->challenge && $product->challenge->isPublished())
-            <p class="mt-3 text-xs text-navy-500"><span class="font-semibold">Tantangan:</span> {{ $product->challenge->title }}</p>
+    <div class="mt-4 flex flex-1 flex-col border-t border-navy-950 pt-3">
+        <p class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-navy-500">
+            @if ($product->theme)
+                <span class="inline-flex items-center gap-1.5"><span class="size-2" style="background: {{ $product->theme->color }}" aria-hidden="true"></span>{{ $product->theme->name }}</span>
+            @endif
+            @if ($product->publicBadgeLabel())
+                <span aria-hidden="true">·</span><span>{{ $product->publicBadgeLabel() }}</span>
+            @endif
+        </p>
+        <h3 class="mt-3 font-serif text-[1.6rem] leading-snug text-navy-950"><a href="{{ $url }}" class="decoration-1 underline-offset-4 hover:underline">{{ $product->displayTitle() }}</a></h3>
+        <p class="mt-2 line-clamp-3 text-[0.95rem] leading-relaxed text-navy-600">{{ $product->public_short_description }}</p>
+        @if ($owner || $team || ($product->challenge && $product->challenge->isPublished()))
+            <dl class="mt-4 space-y-1 text-sm text-navy-500">
+                @if ($owner)<div><dt class="inline">Mitra:</dt> <dd class="inline text-navy-700">{{ $owner->displayName() }}</dd></div>@endif
+                @if ($product->challenge && $product->challenge->isPublished())<div><dt class="inline">Tantangan:</dt> <dd class="inline text-navy-700">{{ $product->challenge->title }}</dd></div>@endif
+                @if ($team)<div><dt class="inline">Tim:</dt> <dd class="inline text-navy-700">{{ $team }}</dd></div>@endif
+            </dl>
         @endif
-        @if ($team)<p class="mt-1 text-xs text-navy-500"><span class="font-semibold">Tim:</span> {{ $team }}</p>@endif
-        <div class="mt-auto pt-5">
-            <a href="{{ route('products.show', $product->public_slug) }}" class="inline-flex items-center gap-1.5 text-sm font-bold text-forest-700 hover:text-forest-600">Lihat Produk <x-icon name="arrow-right" class="size-4" /></a>
-        </div>
     </div>
 </article>

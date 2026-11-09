@@ -27,6 +27,8 @@ class ChallengeController extends Controller
             'challenges' => $challenges,
             'themes' => $themes,
             'activeTheme' => $theme,
+            // Membedakan "belum ada tantangan terbit sama sekali" dari "tidak ada yang cocok dengan penyaring".
+            'publishedTotal' => Challenge::query()->published()->count(),
             'owners' => ChallengeOwner::query()->public()->whereHas('challenges', fn ($q) => $q->published())->get(),
         ]);
     }

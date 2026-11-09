@@ -106,7 +106,7 @@
             @if ($team)
                 <div class="card card-body">
                     <div class="flex items-center justify-between">
-                        <h2 class="card-title">Tim {{ $team->name }}</h2>
+                        <h2 class="card-title">{{ $team->name }}</h2>
                         <a href="{{ route('portal.team') }}" class="text-sm font-semibold text-forest-700">Kelola</a>
                     </div>
                     <p class="mt-1 text-sm text-navy-500">{{ $team->institution }}</p>

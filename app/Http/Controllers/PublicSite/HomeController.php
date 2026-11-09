@@ -19,12 +19,19 @@ class HomeController extends Controller
 {
     public function index(): View
     {
+        $stages = ProgramStage::query()->public()->ordered()->get();
+
         return view('public.home', [
             'openCall' => Settings::openCallState(),
             'themes' => Theme::query()->active()->withCount(['eligibleChallenges as published_challenges_count' => fn ($q) => $q->where('status', 'published')])->get(),
             'challenges' => Challenge::query()->published()->with(['theme', 'owner'])->orderBy('sort_order')->limit(6)->get(),
+            'challengeCount' => Challenge::query()->published()->count(),
             'owners' => ChallengeOwner::query()->public()->with('theme')->limit(12)->get(),
-            'stages' => ProgramStage::query()->public()->get(),
+            'stages' => $stages,
+            // Status program diambil dari data, bukan teks tetap: tahap yang ditandai "Berlangsung"
+            // dan kegiatan publik terakhir yang berstatus "Selesai".
+            'currentStage' => $stages->first(fn ($stage) => $stage->status === 'ongoing' && $stage->phase_number !== null),
+            'lastActivity' => AgendaItem::query()->public()->where('status', 'completed')->whereNotNull('date')->orderByDesc('date')->orderByDesc('sort_order')->first(),
             'stats' => collect(setting('homepage_stats', []))->filter(fn ($s) => filled($s['value'] ?? null)),
             'people' => Person::query()->public()->whereIn('type', ['mentor', 'juror'])->limit(8)->get(),
             'products' => Proposal::query()->publicProducts()->with(['theme', 'challenge.owner', 'team'])->latest('published_at')->limit(6)->get(),

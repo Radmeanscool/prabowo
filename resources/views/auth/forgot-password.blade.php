@@ -1,5 +1,5 @@
 <x-layouts.auth title="Lupa kata sandi">
-    <h1 class="text-2xl font-extrabold">Lupa kata sandi</h1>
+    <h1 class="font-serif text-[2.6rem] font-normal leading-[1.05]">Lupa kata sandi</h1>
     <p class="mt-2 text-sm text-navy-500">Masukkan surel akun Anda. Kami akan mengirim tautan untuk mengatur ulang kata sandi.</p>
     <div class="mt-6"><x-flash /></div>
     <form method="POST" action="{{ route('password.email') }}" class="space-y-4">

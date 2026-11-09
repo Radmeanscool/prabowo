@@ -1,6 +1,6 @@
 <x-layouts.auth title="Setup admin">
     <p class="eyebrow text-forest-600">Instalasi awal</p>
-    <h1 class="mt-1 text-2xl font-extrabold">Buat admin pertama</h1>
+    <h1 class="mt-1 font-serif text-[2.6rem] font-normal leading-[1.05]">Buat admin pertama</h1>
     <p class="mt-2 text-sm leading-relaxed text-navy-500">Halaman ini hanya tersedia sebelum ada akun admin dan bila <code class="rounded bg-navy-100 px-1">SETUP_TOKEN</code> diisi pada berkas <code class="rounded bg-navy-100 px-1">.env</code>. Setelah selesai, hapus nilai token tersebut.</p>
     <div class="mt-6"><x-flash /></div>
     <form method="POST" action="{{ route('setup') }}" class="space-y-4">

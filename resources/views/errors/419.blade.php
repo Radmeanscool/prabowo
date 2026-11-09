@@ -7,14 +7,15 @@
     <title>Sesi kedaluwarsa · DEEPNEST</title>
     @vite(['resources/css/app.css'])
 </head>
-<body class="hero-surface flex min-h-screen items-center justify-center px-4 text-white">
-    <main class="max-w-lg text-center">
-        <p class="text-7xl font-extrabold text-signal-400">419</p>
-        <h1 class="mt-4 text-3xl font-extrabold text-white">Sesi kedaluwarsa</h1>
-        <p class="mt-3 text-navy-200">Sesi Anda telah berakhir. Muat ulang halaman lalu coba lagi.</p>
-        <div class="mt-8 flex flex-wrap justify-center gap-3">
+<body class="flex min-h-screen items-center px-5 sm:px-10">
+    <main class="mx-auto w-full max-w-3xl">
+        <p class="border-b border-navy-950 pb-3 text-[0.82rem] font-medium text-navy-700">DEEPNEST</p>
+        <p class="mt-10 font-serif text-[clamp(6rem,20vw,11rem)] leading-[0.85] text-navy-950">419</p>
+        <h1 class="mt-6 font-serif text-4xl font-normal text-navy-950">Sesi kedaluwarsa</h1>
+        <p class="mt-3 max-w-xl leading-relaxed text-navy-600">Sesi Anda telah berakhir. Muat ulang halaman lalu coba lagi.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
             <a href="{{ url('/') }}" class="btn btn-primary">Ke Beranda</a>
-            <a href="{{ url('/masuk') }}" class="btn btn-outline-light">Masuk</a>
+            <a href="{{ url('/masuk') }}" class="btn btn-outline">Masuk</a>
         </div>
     </main>
 </body>

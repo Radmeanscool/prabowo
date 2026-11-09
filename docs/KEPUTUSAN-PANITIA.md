@@ -24,7 +24,9 @@ diisi setelah diputuskan — tidak perlu mengubah kode.
 | 15 | Notifikasi surel di rilis pertama | Tersedia, nonaktif | Admin → Pengaturan + `MAIL_*` di `.env` |
 | 16 | Konfirmasi HIPELKI sebagai mitra | "Menunggu konfirmasi", tidak publik | Admin → Mitra Challenge Owner |
 | 17 | Identitas mitra penyedia teknologi drone (FGD 1) | Draf tantangan drone tanpa mitra | Admin → Tantangan |
-| 18 | Kontak resmi di situs | Kontak kop surat Direktorat Inovasi dan KI Unhas | Admin → Pengaturan |
+| 18 | Kontak resmi di situs | Kontak kop surat Direktorat Inovasi dan KI Unhas (office@unhas.ac.id, +62 811 5003636) — konfirmasi apakah perlu kontak khusus DEEPNEST | Admin → Pengaturan |
+| 19 | Jadwal rencana (validasi lapangan, FGD 2, penyerahan tantangan, Bootcamp–Demo Day) | Tersimpan sebagai agenda **tidak publik**; hanya FGD 1 (sudah terlaksana) yang tampil | Admin → Agenda (centang *Tampilkan publik* setelah tanggal pasti) |
+| 20 | Nama lembaga juri eksternal | Tidak disebut di situs (hanya "3 juri eksternal") sampai terkonfirmasi | Admin → Mentor & Juri |
 
 ## 2. Asumsi yang dipakai
 
@@ -40,7 +42,13 @@ diisi setelah diputuskan — tidak perlu mengubah kode.
   "Tampilkan untuk proposal bertema").
 - Mentor tidak wajib memiliki akun; juri yang menilai lewat portal memakai akun reviewer dan dapat
   dihubungkan ke profil direktori agar konflik "juri membimbing tim" terdeteksi.
-- Statistik beranda bersumber dari dokumen resmi dan diberi keterangan *target*/*rencana*.
+- Statistik beranda bersumber dari proposal program dan selalu diberi keterangan *target*/*rencana*,
+  disertai kalimat "bukan capaian". Angka yang tidak terkait luaran (mis. jumlah laboratorium) tidak ditampilkan.
+- Situs publik hanya menampilkan informasi yang dapat diverifikasi dari data: bagian beranda Produk, Mitra,
+  Pengumuman, Agenda, dan Dokumen baru muncul setelah ada isi yang diterbitkan; tautan navigasi Produk,
+  Mitra, dan Sumber Daya juga baru muncul setelah ada isinya.
+  Blok "Status program" di beranda membaca tahap berstatus *Berlangsung*, kegiatan publik terakhir
+  berstatus *Selesai*, jumlah tantangan terbit, dan status Open Call — tidak ada teks status yang ditulis tetap.
 - Konten daftar periksa visitasi legal bersifat RAHASIA: tidak dimasukkan ke situs; sistem menyediakan
   unggahan "telaah internal" khusus admin per proposal.
 

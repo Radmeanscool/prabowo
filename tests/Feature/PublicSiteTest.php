@@ -2,10 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Enums\ProposalStatus;
+use App\Models\AgendaItem;
 use App\Models\Announcement;
 use App\Models\ChallengeOwner;
 use App\Models\Document;
 use App\Models\Person;
+use App\Services\ProposalWorkflow;
+use App\Support\Settings;
 use Database\Seeders\AgendaSeeder;
 use Database\Seeders\ChallengeOwnerSeeder;
 use Database\Seeders\ChallengeSeeder;
@@ -46,7 +50,7 @@ class PublicSiteTest extends TestCase
 
     public function test_draft_challenges_are_not_public_until_published(): void
     {
-        $this->get(route('challenges.index'))->assertOk()->assertSee('Tantangan final segera diumumkan')->assertDontSee('Ketertelusuran dan mutu rumput laut');
+        $this->get(route('challenges.index'))->assertOk()->assertSee('Tantangan final belum diumumkan')->assertDontSee('Ketertelusuran dan mutu rumput laut');
         $this->get(route('challenges.show', 'ketertelusuran-dan-mutu-rumput-laut-pascapanen'))->assertNotFound();
 
         $published = $this->publishedChallenge();
@@ -118,5 +122,58 @@ class PublicSiteTest extends TestCase
 
         $this->get(route('products.index'))->assertOk()->assertDontSee($draft->product_name)->assertDontSee($submitted->product_name);
         $this->get(route('products.show', $draft->slug))->assertNotFound();
+    }
+
+    public function test_homepage_shows_only_verifiable_information(): void
+    {
+        // Kondisi instalasi baru: Open Call otomatis tanpa tanggal.
+        Settings::set(['open_call_mode' => 'auto', 'open_call_start_at' => null, 'open_call_end_at' => null]);
+
+        $this->get('/')->assertOk()
+            // Status program diambil dari data: tahap berjalan dan kegiatan terakhir yang selesai.
+            ->assertSee('Status program')
+            ->assertSee('Challenge Discovery')
+            ->assertSee('FGD Challenge Discovery')
+            ->assertSee('Sedang dirumuskan bersama mitra')
+            ->assertSee('Jadwal akan diumumkan')
+            // Angka target selalu ditandai sebagai target, bukan capaian.
+            ->assertSee('bukan capaian')
+            // Belum ada produk/mitra publik: tidak ada bagian maupun tautan navigasi ke halaman kosong.
+            ->assertDontSee('Produk yang disetujui')
+            ->assertDontSee(route('products.index'), false)
+            ->assertDontSee(route('owners.index'), false)
+            // Lembaga juri belum terkonfirmasi tidak disebut.
+            ->assertDontSee('BRIN')
+            ->assertDontSee('Kementerian Kesehatan')
+            ->assertDontSee('Laboratorium Unhas');
+    }
+
+    public function test_planned_agenda_items_stay_private_until_admin_publishes_them(): void
+    {
+        $this->get(route('agenda'))->assertOk()
+            ->assertSee('FGD Challenge Discovery')
+            ->assertDontSee('Validasi lapangan ke mitra prioritas')
+            ->assertDontSee('Bootcamp (Hari 1)');
+        $this->get(route('timeline'))->assertOk()->assertDontSee('Penyerahan tantangan final ke Open Call');
+
+        AgendaItem::query()->where('title', 'Validasi lapangan ke mitra prioritas')->update(['is_public' => true]);
+        $this->get(route('agenda'))->assertSee('Validasi lapangan ke mitra prioritas');
+    }
+
+    public function test_product_section_and_navigation_appear_once_a_product_is_approved(): void
+    {
+        $this->get('/')->assertDontSee('Produk yang disetujui');
+        $this->get(route('products.index'))->assertOk()->assertSee('Belum ada produk yang disetujui.');
+
+        $proposal = $this->submittedProposal();
+        (new ProposalWorkflow)->transition($proposal, ProposalStatus::Approved, $this->admin(), null, [
+            'public_title' => 'Alat Uji Mutu Rumput Laut',
+            'public_short_description' => 'Ringkasan publik yang telah ditinjau.',
+        ]);
+        auth()->logout();
+
+        $this->get('/')->assertSee('Produk yang disetujui')->assertSee('Alat Uji Mutu Rumput Laut')
+            ->assertSee(route('products.index'), false);
+        $this->get(route('products.index'))->assertSee('Alat Uji Mutu Rumput Laut')->assertDontSee('Belum ada produk yang disetujui.');
     }
 }

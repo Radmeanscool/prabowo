@@ -1,22 +1,46 @@
 {
-  "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-cyrillic-ext-wght-normal.woff2": {
-    "file": "assets/plus-jakarta-sans-cyrillic-ext-wght-normal-lLTsRRxN.woff2",
-    "src": "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-cyrillic-ext-wght-normal.woff2"
+  "node_modules/@fontsource-variable/instrument-sans/files/instrument-sans-latin-ext-wght-normal.woff2": {
+    "file": "assets/instrument-sans-latin-ext-wght-normal-B5bTHO_g.woff2",
+    "src": "node_modules/@fontsource-variable/instrument-sans/files/instrument-sans-latin-ext-wght-normal.woff2"
   },
-  "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-ext-wght-normal.woff2": {
-    "file": "assets/plus-jakarta-sans-latin-ext-wght-normal-DmpS2jIq.woff2",
-    "src": "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-ext-wght-normal.woff2"
+  "node_modules/@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2": {
+    "file": "assets/instrument-sans-latin-wght-normal-BbzFLZTg.woff2",
+    "src": "node_modules/@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2"
   },
-  "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2": {
-    "file": "assets/plus-jakarta-sans-latin-wght-normal-eXO_dkmS.woff2",
-    "src": "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2"
+  "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff": {
+    "file": "assets/instrument-serif-latin-400-italic-u__WvvIK.woff",
+    "src": "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff"
   },
-  "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-vietnamese-wght-normal.woff2": {
-    "file": "assets/plus-jakarta-sans-vietnamese-wght-normal-qRpaaN48.woff2",
-    "src": "node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-vietnamese-wght-normal.woff2"
+  "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2": {
+    "file": "assets/instrument-serif-latin-400-italic-DKMiL14s.woff2",
+    "src": "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2"
+  },
+  "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff": {
+    "file": "assets/instrument-serif-latin-400-normal-BVbkICAY.woff",
+    "src": "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff"
+  },
+  "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2": {
+    "file": "assets/instrument-serif-latin-400-normal-DnYpCC2O.woff2",
+    "src": "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2"
+  },
+  "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-ext-400-italic.woff": {
+    "file": "assets/instrument-serif-latin-ext-400-italic-D7-lnxEk.woff",
+    "src": "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-ext-400-italic.woff"
+  },
+  "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-ext-400-italic.woff2": {
+    "file": "assets/instrument-serif-latin-ext-400-italic-C9HzH3YL.woff2",
+    "src": "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-ext-400-italic.woff2"
+  },
+  "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-ext-400-normal.woff": {
+    "file": "assets/instrument-serif-latin-ext-400-normal-CFCUzsTy.woff",
+    "src": "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-ext-400-normal.woff"
+  },
+  "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-ext-400-normal.woff2": {
+    "file": "assets/instrument-serif-latin-ext-400-normal-C2je3j2s.woff2",
+    "src": "node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-ext-400-normal.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-DIGxhl1J.css",
+    "file": "assets/app-CkM4L33b.css",
     "name": "app",
     "names": [
       "app.css"
@@ -24,10 +48,16 @@
     "src": "resources/css/app.css",
     "isEntry": true,
     "assets": [
-      "assets/plus-jakarta-sans-cyrillic-ext-wght-normal-lLTsRRxN.woff2",
-      "assets/plus-jakarta-sans-vietnamese-wght-normal-qRpaaN48.woff2",
-      "assets/plus-jakarta-sans-latin-ext-wght-normal-DmpS2jIq.woff2",
-      "assets/plus-jakarta-sans-latin-wght-normal-eXO_dkmS.woff2"
+      "assets/instrument-sans-latin-ext-wght-normal-B5bTHO_g.woff2",
+      "assets/instrument-sans-latin-wght-normal-BbzFLZTg.woff2",
+      "assets/instrument-serif-latin-ext-400-normal-C2je3j2s.woff2",
+      "assets/instrument-serif-latin-ext-400-normal-CFCUzsTy.woff",
+      "assets/instrument-serif-latin-400-normal-DnYpCC2O.woff2",
+      "assets/instrument-serif-latin-400-normal-BVbkICAY.woff",
+      "assets/instrument-serif-latin-ext-400-italic-C9HzH3YL.woff2",
+      "assets/instrument-serif-latin-ext-400-italic-D7-lnxEk.woff",
+      "assets/instrument-serif-latin-400-italic-DKMiL14s.woff2",
+      "assets/instrument-serif-latin-400-italic-u__WvvIK.woff"
     ]
   },
   "resources/js/app.js": {

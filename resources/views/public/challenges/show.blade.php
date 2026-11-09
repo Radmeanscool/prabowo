@@ -1,10 +1,6 @@
 <x-layouts.public :title="$challenge->title" :description="$challenge->summary">
-    <x-page-hero :title="$challenge->title" :eyebrow="'Tantangan · '.$challenge->theme?->name" :lead="$challenge->summary">
-        <a href="{{ route('register') }}" class="btn btn-primary">Jawab Tantangan Ini</a>
-        <a href="{{ route('challenges.index') }}" class="btn btn-outline-light">Semua Tantangan</a>
-    </x-page-hero>
-
     @php
+        $registrationOpen = (bool) setting('registration_enabled', true);
         $sections = array_filter([
             'Rumusan tantangan' => $challenge->challenge_statement,
             'Pernyataan masalah' => $challenge->problem_statement,
@@ -20,48 +16,53 @@
         ], fn ($v) => filled($v));
     @endphp
 
-    <section class="section">
-        <div class="container-page grid gap-10 lg:grid-cols-[1fr_340px]">
-            <article class="card divide-y divide-navy-100">
+    <x-page-hero :title="$challenge->title" :eyebrow="'Tantangan · '.$challenge->theme?->name" :lead="$challenge->summary">
+        @if ($registrationOpen)
+            <a href="{{ route('register') }}" class="btn btn-primary">Jawab Tantangan Ini</a>
+        @endif
+        <a href="{{ route('challenges.index') }}" class="btn btn-outline">Semua Tantangan</a>
+    </x-page-hero>
+
+    <section class="section pt-14 sm:pt-16">
+        <div class="container-page grid gap-14 lg:grid-cols-12 lg:gap-10">
+            <article class="lg:col-span-8">
                 @foreach ($sections as $heading => $text)
-                    <div class="p-6 sm:px-10">
-                        <h2 class="text-lg font-extrabold">{{ $heading }}</h2>
-                        <div class="mt-3 space-y-3 leading-relaxed text-navy-700">{{ paragraphs($text) }}</div>
+                    <div class="grid gap-3 border-t border-navy-950/15 py-7 first:border-navy-950 first:pt-5 sm:grid-cols-[11rem_1fr] sm:gap-8">
+                        <h2 class="text-sm font-semibold text-navy-950">{{ $heading }}</h2>
+                        <div class="space-y-3 leading-relaxed text-navy-700">{{ paragraphs($text) }}</div>
                     </div>
                 @endforeach
             </article>
-            <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start">
-                <div class="card p-6">
-                    <p class="eyebrow text-navy-400">Dapat dipilih oleh tema</p>
-                    <div class="mt-3 flex flex-wrap gap-2">
+            <aside class="space-y-10 lg:sticky lg:top-24 lg:col-span-3 lg:col-start-10 lg:self-start">
+                <div class="border-t border-navy-950 pt-3">
+                    <p class="eyebrow text-navy-500">Dapat dipilih oleh tema</p>
+                    <ul class="mt-3 space-y-2">
                         @foreach ($challenge->themes as $theme)
-                            <x-theme-badge :theme="$theme" />
+                            <li class="flex items-center gap-2 text-navy-800"><span class="size-2" style="background: {{ $theme->color }}" aria-hidden="true"></span>{{ $theme->name }}</li>
                         @endforeach
-                    </div>
+                    </ul>
                     @if ($owner)
-                        <p class="eyebrow mt-6 text-navy-400">Pemilik tantangan</p>
-                        <a href="{{ route('owners.show', $owner->slug) }}" class="mt-2 flex items-center gap-3 font-bold text-navy-950 hover:text-forest-700">
-                            <span class="flex size-10 items-center justify-center rounded-xl bg-navy-950 text-xs font-extrabold text-signal-400">{{ $owner->initials() }}</span>
-                            {{ $owner->name }}
-                        </a>
+                        <p class="eyebrow mt-8 text-navy-500">Pemilik tantangan</p>
+                        <a href="{{ route('owners.show', $owner->slug) }}" class="mt-3 block font-serif text-[1.6rem] leading-snug text-navy-950 decoration-1 underline-offset-4 hover:underline">{{ $owner->name }}</a>
                     @endif
                 </div>
-                <div class="card p-6">
-                    <p class="font-bold">Cara menjawab tantangan</p>
-                    <ol class="mt-3 list-decimal space-y-1.5 pl-5 text-sm text-navy-600">
-                        <li>Buat akun dan bentuk tim lintas disiplin.</li>
-                        <li>Pilih tema, lalu pilih tantangan ini.</li>
-                        <li>Lengkapi proposal dan unggah berkas.</li>
-                        <li>Kirim saat Open Call dibuka.</li>
+                <div class="border-t border-navy-950 pt-3">
+                    <p class="eyebrow text-navy-500">Cara menjawab tantangan</p>
+                    <ol class="mt-3 space-y-2.5 text-sm leading-relaxed text-navy-700">
+                        @foreach (['Buat akun dan bentuk tim lintas disiplin.', 'Pilih tema, lalu pilih tantangan ini.', 'Lengkapi proposal dan unggah berkas.', 'Kirim saat Open Call dibuka.'] as $i => $step)
+                            <li class="flex gap-3"><span class="tabular-nums text-navy-400">{{ str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) }}</span>{{ $step }}</li>
+                        @endforeach
                     </ol>
-                    <a href="{{ route('register') }}" class="btn btn-primary mt-5 w-full">Daftar Sekarang</a>
+                    @if ($registrationOpen)
+                        <a href="{{ route('register') }}" class="btn btn-primary mt-5">Daftar Sekarang</a>
+                    @endif
                 </div>
             </aside>
         </div>
         @if ($related->isNotEmpty())
-            <div class="container-page mt-16">
-                <h2 class="text-2xl font-extrabold">Tantangan lain di tema ini</h2>
-                <div class="mt-6 grid gap-6 md:grid-cols-3">
+            <div class="container-page mt-20">
+                <div class="border-b border-navy-950 pb-3"><h2 class="subhead">Tantangan lain di tema ini</h2></div>
+                <div class="mt-10 grid gap-x-8 gap-y-14 md:grid-cols-3">
                     @foreach ($related as $item)
                         <x-challenge-card :challenge="$item" />
                     @endforeach

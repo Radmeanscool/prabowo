@@ -1,5 +1,5 @@
 <x-layouts.auth title="Daftar">
-    <h1 class="text-2xl font-extrabold">Daftar sebagai peserta</h1>
+    <h1 class="font-serif text-[2.6rem] font-normal leading-[1.05]">Daftar sebagai peserta</h1>
     <p class="mt-2 text-sm leading-relaxed text-navy-500">Buat akun pribadi, lalu buat tim atau bergabung dengan tim lintas disiplin. Akun reviewer/juri dibuat oleh panitia.</p>
 
     <div class="mt-6"><x-flash /></div>

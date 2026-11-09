@@ -1,10 +1,9 @@
 @props(['title', 'eyebrow' => null, 'lead' => null])
-<section class="hero-surface relative overflow-hidden text-white">
-    <div class="grid-lines absolute inset-0" aria-hidden="true"></div>
-    <div class="container-page relative py-14 sm:py-16">
-        @if ($eyebrow)<p class="eyebrow text-signal-400">{{ $eyebrow }}</p>@endif
-        <h1 class="mt-3 max-w-4xl text-3xl font-extrabold text-white sm:text-5xl">{{ $title }}</h1>
-        @if ($lead)<p class="mt-4 max-w-3xl text-base leading-relaxed text-navy-200 sm:text-lg">{{ $lead }}</p>@endif
-        @if (trim($slot))<div class="mt-6 flex flex-wrap gap-3">{{ $slot }}</div>@endif
+<section class="border-b border-navy-950/10">
+    <div class="container-page pb-12 pt-8 sm:pb-16 sm:pt-12">
+        <p class="border-b border-navy-950 pb-3 text-[0.82rem] font-medium text-navy-700">{{ $eyebrow ?? 'DEEPNEST' }}</p>
+        <h1 class="mt-10 max-w-4xl font-serif text-[clamp(2.6rem,5.6vw,5rem)] font-normal leading-[0.98] tracking-[-0.012em] text-navy-950 sm:mt-14">{{ $title }}</h1>
+        @if ($lead)<p class="lede mt-6 max-w-3xl">{{ $lead }}</p>@endif
+        @if (trim($slot))<div class="mt-8 flex flex-wrap items-center gap-3">{{ $slot }}</div>@endif
     </div>
 </section>

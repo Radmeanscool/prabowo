@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\ChallengeOwner;
+use App\Models\Document;
 use App\Models\Proposal;
 use Carbon\Carbon;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -51,6 +53,16 @@ class AppServiceProvider extends ServiceProvider
                 $portalProposal = $team ? Proposal::query()->where('team_id', $team->id)->latest('id')->first() : null;
             }
             $view->with('portalProposal', $portalProposal);
+        });
+
+        // Navigasi situs publik hanya menautkan bagian yang sudah berisi data terbit,
+        // agar pengunjung tidak diarahkan ke halaman kosong (mis. katalog produk sebelum ada yang disetujui).
+        View::composer('components.layouts.public', function ($view) {
+            $view->with('publicNav', [
+                'products' => Proposal::query()->publicProducts()->exists(),
+                'owners' => ChallengeOwner::query()->public()->exists(),
+                'documents' => Document::query()->published()->where('visibility', 'public')->exists(),
+            ]);
         });
     }
 }

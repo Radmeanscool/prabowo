@@ -9,6 +9,10 @@ use Illuminate\Database\Seeder;
 /**
  * Agenda yang tercantum di dokumen resmi (surat undangan dan KAK Challenge Discovery).
  * Butir tanpa tanggal pasti diberi status "Rencana" dan label waktu umum.
+ *
+ * Hanya kegiatan yang sudah terlaksana yang tampil publik secara bawaan. Butir rencana
+ * disimpan sebagai draf (tidak publik) agar situs tidak menampilkan jadwal yang belum
+ * ditetapkan; admin menayangkannya melalui menu Agenda setelah tanggalnya pasti.
  */
 class AgendaSeeder extends Seeder
 {
@@ -52,7 +56,7 @@ class AgendaSeeder extends Seeder
                 'location' => $location,
                 'description' => $description,
                 'status' => $status,
-                'is_public' => true,
+                'is_public' => $status === 'completed',
                 'sort_order' => $i + 1,
             ]);
         }

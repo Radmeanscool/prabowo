@@ -74,7 +74,8 @@ $app = require_once __DIR__.'/../deepnest/bootstrap/app.php';
 2. Isi tabel dengan salah satu cara:
    - **Tanpa SSH:** phpMyAdmin → pilih database kosong → *Import* → unggah
      `database/deepnest-install.sql` (skema + data rujukan: tema, 11 tahapan, 2 fase & 18 kriteria
-     penilaian, 11 mitra *tidak publik*, 9 draf tantangan dari FGD 1, agenda resmi, halaman, FAQ).
+     penilaian, 11 mitra *tidak publik*, 9 draf tantangan dari FGD 1, agenda resmi — hanya FGD 1 yang publik, butir rencana tersimpan
+     sebagai draf — halaman, FAQ).
      Tidak berisi akun maupun data demo.
    - **Dengan SSH:** `php artisan migrate --seed --force`.
 
