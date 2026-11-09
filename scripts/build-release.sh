@@ -18,7 +18,7 @@ tar -C "$ROOT" \
     --exclude=./.env --exclude='./deepnest-release*.zip' --exclude=./storage/logs/'*.log' \
     --exclude=./storage/app/private/proposals --exclude=./storage/app/private/public-products \
     --exclude=./storage/framework/sessions/'*' --exclude=./storage/framework/views/'*.php' \
-    --exclude=./storage/framework/cache/data \
+    --exclude=./storage/framework/cache/data --exclude=./.phpunit.result.cache --exclude=./.phpunit.cache \
     -cf - . | tar -C "$APP" -xf -
 
 if command -v npm >/dev/null 2>&1 && [ -d "$ROOT/node_modules" ]; then
